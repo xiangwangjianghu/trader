@@ -1,0 +1,79 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'java-library'
+    id 'maven-publish'
+    id 'org.springframework.boot' version '3.2.6'
+    id 'io.spring.dependency-management' version '1.1.5'
+}
+
+//所有模块生效——基础配置
+allprojects {
+    // 配置项目信息
+    group = 'com.newtouch'
+    version = '0.0.1-SNAPSHOT'
+    // 配置字符编码
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = 'UTF-8'
+    }
+
+    java {
+        sourceCompatibility = '21'
+        targetCompatibility = '21'
+    }
+
+    //仓库配置
+    repositories {
+        //本地
+        mavenLocal()
+        //阿里仓库
+        maven { url 'https://maven.aliyun.com/repository/public/' }
+        //中央仓库
+        mavenCentral()
+    }
+
+}
+
+//所有子模块生效——springboot配置、导包版本管理、打包管理
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'java-library'
+    //所有子模块都是springboot项目，如不是，不能打包。
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    //所有子模块的-依赖版本管理
+    dependencyManagement {
+        imports {
+            mavenBom "com.alibaba.cloud:spring-cloud-alibaba-dependencies:2023.0.1.0"
+            mavenBom "org.springframework.boot:spring-boot-dependencies:3.2.6"
+        }
+
+        dependencies {
+            dependency "cn.hutool:hutool-all:5.0.7"
+            dependency "org.apache.commons:commons-lang3:3.5"
+
+            dependency 'org.postgresql:postgresql:42.7.3'
+            dependency 'com.baomidou:mybatis-plus-spring-boot3-starter:3.5.6'
+        }
+    }
+
+    //使用 gradle打包工具
+//    jar {
+//        manifest.attributes provider: 'gradle'
+//    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+
+}
+
+// 定义任务：配置 gradle-wrapper.properties 下载gradle属性
+wrapper {
+    //gradle的版本
+    gradleVersion = '8.7'
+    //版本类型：BIN、ALL（完全版，可以看gradle的代码）
+    distributionType = 'ALL'
+}

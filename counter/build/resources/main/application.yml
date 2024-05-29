@@ -1,0 +1,23 @@
+server:
+  port: 8999
+
+spring:
+  application:
+    name: common
+  profiles:
+    active: default
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: root
+    driverClassName: org.postgresql.Driver
+  jackson:
+    time-zone: GMT+8
+
+mybatis-plus:
+  mapper-locations: classpath:/mappers/*.xml
+  #开启驼峰映射，详情在XML文件中
+  configuration:
+    map-underscore-to-camel-case: true
+
+
