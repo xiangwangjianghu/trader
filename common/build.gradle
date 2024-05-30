@@ -1,3 +1,7 @@
+plugins {
+    id 'java-library'
+}
+
 dependencies {
 //    jar.enabled=true
 
@@ -10,5 +14,6 @@ dependencies {
 
     api 'cn.hutool:hutool-all'
     api 'org.apache.commons:commons-lang3'
-
+    api 'com.google.guava:guava'
+    api 'com.alibaba.fastjson2:fastjson2'
 }

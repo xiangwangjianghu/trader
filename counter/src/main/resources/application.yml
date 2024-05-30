@@ -1,5 +1,5 @@
 server:
-  port: 8999
+  port: 8090
 
 spring:
   application:
@@ -20,4 +20,13 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
 
+# redis缓存
+cache-expire:
+  captcha: 100
+  account: 3600
+  order: 36000
 
+# 机器位置: 机房ID,机柜ID
+counter:
+  data-center-id: 0
+  worker-id: 0

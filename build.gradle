@@ -32,6 +32,14 @@ allprojects {
         mavenCentral()
     }
 
+    // 定义任务：配置 gradle-wrapper.properties 下载gradle属性
+    wrapper {
+        //gradle的版本
+        gradleVersion = '8.7'
+        //版本类型：BIN、ALL（完全版，可以看gradle的代码）
+        distributionType = 'ALL'
+    }
+
 }
 
 //所有子模块生效——springboot配置、导包版本管理、打包管理
@@ -51,11 +59,15 @@ subprojects {
         }
 
         dependencies {
-            dependency "cn.hutool:hutool-all:5.0.7"
-            dependency "org.apache.commons:commons-lang3:3.5"
-
+            //   数据库类
             dependency 'org.postgresql:postgresql:42.7.3'
             dependency 'com.baomidou:mybatis-plus-spring-boot3-starter:3.5.6'
+
+            //   工具类
+            dependency "cn.hutool:hutool-all:5.0.7"
+            dependency "org.apache.commons:commons-lang3:3.14.0"
+            dependency 'com.google.guava:guava:33.2.0-jre'
+            dependency 'com.alibaba.fastjson2:fastjson2:2.0.50'
         }
     }
 
@@ -68,12 +80,4 @@ subprojects {
         useJUnitPlatform()
     }
 
-}
-
-// 定义任务：配置 gradle-wrapper.properties 下载gradle属性
-wrapper {
-    //gradle的版本
-    gradleVersion = '8.7'
-    //版本类型：BIN、ALL（完全版，可以看gradle的代码）
-    distributionType = 'ALL'
 }
