@@ -1,4 +1,4 @@
-.idea/
+.idea/**
 
-common/build/
-counter/build/
+common/build/**
+counter/build/**
