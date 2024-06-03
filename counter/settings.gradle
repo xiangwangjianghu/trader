@@ -1,1 +1,3 @@
 rootProject.name = 'counter'
+
+includeFlat 'common'

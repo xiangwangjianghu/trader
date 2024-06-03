@@ -1,19 +1,26 @@
 plugins {
+    id 'java'
+    id 'idea'
     id 'java-library'
+    //所有子模块都是springboot项目，如不是，不能打包。
+    id 'maven-publish'
+    id 'org.springframework.boot' version '3.2.6'
+    id 'io.spring.dependency-management' version '1.1.5'
 }
 
 dependencies {
-//    jar.enabled=true
-
     //    web
     api 'org.springframework.boot:spring-boot-starter-web'
+    api 'com.baomidou:mybatis-plus-spring-boot3-starter:3.5.6'
 
-    // 使用api传到lombok依赖,不使用compileOnly
-    api 'org.projectlombok:lombok'
+    // redis
+    api 'org.springframework.boot:spring-boot-starter-data-redis'
+
+    // lombok
     annotationProcessor 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok'
+}
 
-    api 'cn.hutool:hutool-all'
-    api 'org.apache.commons:commons-lang3'
-    api 'com.google.guava:guava'
-    api 'com.alibaba.fastjson2:fastjson2'
+tasks.bootJar {
+    enabled = false
 }

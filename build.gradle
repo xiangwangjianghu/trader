@@ -62,13 +62,22 @@ subprojects {
             //   数据库类
             dependency 'org.postgresql:postgresql:42.7.3'
             dependency 'com.baomidou:mybatis-plus-spring-boot3-starter:3.5.6'
-
-            //   工具类
-            dependency "cn.hutool:hutool-all:5.0.7"
-            dependency "org.apache.commons:commons-lang3:3.14.0"
-            dependency 'com.google.guava:guava:33.2.0-jre'
-            dependency 'com.alibaba.fastjson2:fastjson2:2.0.50'
         }
+    }
+
+    dependencies {
+        // lombok
+//        annotationProcessor 'org.projectlombok:lombok'
+//        compileOnly 'org.projectlombok:lombok'
+//        testAnnotationProcessor 'org.projectlombok:lombok'
+//        testCompileOnly 'org.projectlombok:lombok'
+        implementation 'org.projectlombok:lombok'
+
+        //   工具类
+        implementation "cn.hutool:hutool-all:5.0.7"
+        implementation "org.apache.commons:commons-lang3:3.14.0"
+        implementation 'com.google.guava:guava:33.2.0-jre'
+        implementation 'com.alibaba.fastjson2:fastjson2:2.0.50'
     }
 
     //使用 gradle打包工具
@@ -80,4 +89,8 @@ subprojects {
         useJUnitPlatform()
     }
 
+}
+
+tasks.bootJar {
+    enabled = false
 }

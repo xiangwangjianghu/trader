@@ -13,12 +13,18 @@ spring:
     driverClassName: org.postgresql.Driver
   jackson:
     time-zone: GMT+8
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      timeout: 6000ms
 
 mybatis-plus:
   mapper-locations: classpath:/mappers/*.xml
   #开启驼峰映射，详情在XML文件中
   configuration:
     map-underscore-to-camel-case: true
+    jdbc-type-for-null: 'null'
 
 # redis缓存
 cache-expire:

@@ -1,4 +1,7 @@
-//apply plugin: 'org.springframework.boot'
+plugins {
+    id 'java-library'
+}
+
 dependencies {
     implementation project(':common')
 
