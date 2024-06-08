@@ -1,8 +1,10 @@
 package com.newtouch.enums;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public enum CacheEnum {
 
     CAPTCHA("captcha:"),
@@ -17,8 +19,4 @@ public enum CacheEnum {
     ;
 
     private String type;
-
-    CacheEnum(String type) {
-        this.type = type;
-    }
 }

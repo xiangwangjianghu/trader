@@ -67,13 +67,12 @@ subprojects {
 
     dependencies {
         // lombok
-//        annotationProcessor 'org.projectlombok:lombok'
-//        compileOnly 'org.projectlombok:lombok'
-//        testAnnotationProcessor 'org.projectlombok:lombok'
-//        testCompileOnly 'org.projectlombok:lombok'
-        implementation 'org.projectlombok:lombok'
 
-        //   工具类
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+        testCompileOnly 'org.projectlombok:lombok'
+        testAnnotationProcessor 'org.projectlombok:lombok'
+        // 工具类
         implementation "cn.hutool:hutool-all:5.0.7"
         implementation "org.apache.commons:commons-lang3:3.14.0"
         implementation 'com.google.guava:guava:33.2.0-jre'

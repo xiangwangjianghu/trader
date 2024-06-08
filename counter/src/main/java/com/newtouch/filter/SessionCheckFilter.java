@@ -1,7 +1,7 @@
 package com.newtouch.filter;
 
 import com.google.common.collect.Sets;
-import com.newtouch.service.AccountService;
+import com.newtouch.service.UserService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,9 +15,9 @@ import java.util.Set;
 public class SessionCheckFilter implements Filter {
 
     @Autowired
-    private AccountService accountService;
+    private UserService userService;
 
-    private Set<String> whiteRootPaths = Sets.newHashSet("login", "msgsocket", "test");
+    private Set<String> whiteRootPaths = Sets.newHashSet("/counter/user/captcha", "/counter/user/loginFail", "test");
 
     // 解决ajax跨域问题
     @Override
@@ -27,19 +27,16 @@ public class SessionCheckFilter implements Filter {
 
         httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
 
-        String[] uriSplit = httpServletRequest.getRequestURI().split("/");
-        if (uriSplit.length < 2) {
-            httpServletRequest.getRequestDispatcher("/login/loginfail").forward(servletRequest, servletResponse);
-        } else {
-            if (!whiteRootPaths.contains(uriSplit[1])) {    //不在白名单 验证token
-                if (accountService.accountExistInCache(httpServletRequest.getParameter("token"))) {
-                    filterChain.doFilter(servletRequest, servletResponse);
-                } else {
-                    httpServletRequest.getRequestDispatcher("/login/loginfail").forward(servletRequest, servletResponse);
-                }
-            } else {
+        String requestURI = httpServletRequest.getRequestURI();
+
+        if (!whiteRootPaths.contains(requestURI)) {    //不在白名单 验证token
+            if (userService.accountExistInCache(httpServletRequest.getParameter("token"))) {
                 filterChain.doFilter(servletRequest, servletResponse);
+            } else {
+                httpServletRequest.getRequestDispatcher("/user/loginFail").forward(servletRequest, servletResponse);
             }
+        } else {
+            filterChain.doFilter(servletRequest, servletResponse);
         }
     }
 

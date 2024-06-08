@@ -1,15 +1,16 @@
 package com.newtouch.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 
 @Data
+@AllArgsConstructor
 public class TraderResponse<T> {
 
-    private int code;
+    int code;
 
-    private String msg;
-
+    String msg;
 
     T data;
 }

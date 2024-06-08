@@ -1,9 +1,11 @@
 server:
+  servlet:
+    context-path: /counter
   port: 8090
 
 spring:
   application:
-    name: common
+    name: counter
   profiles:
     active: default
   datasource:

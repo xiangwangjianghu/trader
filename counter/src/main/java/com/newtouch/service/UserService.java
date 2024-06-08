@@ -1,8 +1,8 @@
 package com.newtouch.service;
 
-import com.newtouch.entity.Account;
+import com.newtouch.entity.User;
 
-public interface AccountService {
+public interface UserService {
     /**
      * 登陆
      *
@@ -13,8 +13,8 @@ public interface AccountService {
      * @return
      * @throws Exception
      */
-    Account login(long uid, String password,
-                  String captcha, String captchaId) throws Exception;
+    User login(long uid, String password,
+               String captcha, String captchaId) throws Exception;
 
     /**
      * 缓存中是否存在已登录信息

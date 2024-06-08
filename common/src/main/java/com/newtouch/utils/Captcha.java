@@ -17,7 +17,7 @@ public class Captcha {
     private BufferedImage bufferedImage;
 
     // 随机数发生器
-    private Random random;
+    private Random random = new Random();
 
     public Captcha(int width, int height, int codeCount, int lineCount) {
         // 1.生成图像

@@ -9,16 +9,7 @@ plugins {
 }
 
 dependencies {
-    //    web
-    api 'org.springframework.boot:spring-boot-starter-web'
-    api 'com.baomidou:mybatis-plus-spring-boot3-starter:3.5.6'
 
-    // redis
-    api 'org.springframework.boot:spring-boot-starter-data-redis'
-
-    // lombok
-    annotationProcessor 'org.projectlombok:lombok'
-    compileOnly 'org.projectlombok:lombok'
 }
 
 tasks.bootJar {
