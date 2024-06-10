@@ -2,6 +2,7 @@ package com.newtouch.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.*;
+import org.springframework.data.annotation.Transient;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -19,8 +20,8 @@ public class User implements Serializable {
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
-    @TableField("uid")
-    private long uid;
+    @TableField("username")
+    private String username;
 
     @TableField("password")
     private String password;
@@ -33,4 +34,10 @@ public class User implements Serializable {
 
     @TableField(value = "update_time", fill = FieldFill.UPDATE)
     private LocalDateTime updateTime;
+
+    @Transient
+    private String loginToken;
+
+    @Transient
+    private String loginMsg;
 }

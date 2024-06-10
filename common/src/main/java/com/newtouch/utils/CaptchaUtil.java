@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.Random;
 
-public class Captcha {
+public class CaptchaUtil {
 
     // 验证码
     private String code;
@@ -19,7 +19,7 @@ public class Captcha {
     // 随机数发生器
     private Random random = new Random();
 
-    public Captcha(int width, int height, int codeCount, int lineCount) {
+    public CaptchaUtil(int width, int height, int codeCount, int lineCount) {
         // 1.生成图像
         bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 

@@ -30,7 +30,7 @@ mybatis-plus:
 
 # redis缓存
 cache-expire:
-  captcha: 100
+  captcha: 120
   account: 3600
   order: 36000
 

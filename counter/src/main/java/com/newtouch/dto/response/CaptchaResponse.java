@@ -8,7 +8,7 @@ import lombok.Data;
 @Builder
 @AllArgsConstructor
 public class CaptchaResponse {
-    private String id;
+    String captchaKey;
 
-    private String imageBase64;
+    String imageBase64;
 }

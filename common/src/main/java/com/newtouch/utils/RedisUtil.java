@@ -26,7 +26,7 @@ public class RedisUtil {
     // 增加缓存
     public void addCache(String key, String value, CacheEnum cacheEnum) {
         int expireTime = switch (cacheEnum) {
-            case ACCOUNT -> accountExpireTime;
+            case USER -> accountExpireTime;
             case CAPTCHA -> captchaExpireTime;
             case ORDER, TRADE, POSI -> orderExpireTime;
             default -> 10;
@@ -41,7 +41,7 @@ public class RedisUtil {
     }
 
     // 删除缓存
-    public void deleteCache(String key, CacheEnum cacheEnum) {
-        stringRedisTemplate.delete(cacheEnum.getType() + key);
+    public Boolean deleteCache(String key, CacheEnum cacheEnum) {
+        return stringRedisTemplate.delete(cacheEnum.getType() + key);
     }
 }

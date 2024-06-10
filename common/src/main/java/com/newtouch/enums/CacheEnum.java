@@ -9,7 +9,7 @@ public enum CacheEnum {
 
     CAPTCHA("captcha:"),
 
-    ACCOUNT("account:"),
+    USER("user:"),
 
     ORDER("order:"),
 

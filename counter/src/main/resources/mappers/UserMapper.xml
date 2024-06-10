@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.newtouch.mappers.UserMapper">
+    <resultMap id="BaseResultMap" type="com.newtouch.entity.User">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="balance"  jdbcType="BIGINT" property="balance"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+
+    <select id="getUser" parameterType="com.newtouch.dto.request.LoginRequest" resultMap="BaseResultMap">
+        select * from public.t_user where
+            username = #{username, jdbcType = VARCHAR} and password = #{password, jdbcType = VARCHAR}
+    </select>
+
+    <update id="updatePassword" parameterType="com.newtouch.dto.request.LoginRequest">
+        update public.t_user set password = #{newPassword, jdbcType = VARCHAR}
+            where username = #{username, jdbcType = VARCHAR} and password = #{password, jdbcType = VARCHAR}
+    </update>
+</mapper>

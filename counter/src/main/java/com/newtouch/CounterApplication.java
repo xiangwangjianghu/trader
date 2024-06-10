@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.newtouch.**"})
-@MapperScan({"com.newtouch.**"})
+@MapperScan({"com.newtouch.mappers"})
 public class CounterApplication {
 
     public static void main(String[] args) {
