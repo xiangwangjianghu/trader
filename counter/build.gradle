@@ -12,4 +12,10 @@ dependencies {
 //    implementation 'org.springframework.boot:spring-boot-starter-actuator'
 }
 
+tasks.register('wrapper', Wrapper) {
+    //gradle的版本
+    gradleVersion = '8.7'
+    //版本类型：BIN、ALL（完全版，可以看gradle的代码）
+    distributionType = 'ALL'
+}
 

@@ -1,6 +1,12 @@
 .idea/**
+/.gradle/**
+/build/**
+/gradle/**
 
-common/build/**
-counter/build/**
 common/.gradle/**
+common/build/**
+common/gradle/**
+
 counter/.gradle/**
+counter/build/**
+counter/gradle/**
