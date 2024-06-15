@@ -1,5 +1,6 @@
 package com.newtouch.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -7,7 +8,8 @@ import lombok.Data;
 public class LoginRequest {
 
     @NotNull
-    String username;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    Long uid;
 
     @NotNull
     String password;

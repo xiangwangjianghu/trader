@@ -3,6 +3,8 @@ package com.newtouch.service;
 import com.newtouch.dto.request.LoginRequest;
 import com.newtouch.entity.User;
 
+import java.math.BigDecimal;
+
 public interface UserService {
     /**
      * 登陆
@@ -37,4 +39,6 @@ public interface UserService {
      * @return
      */
     boolean updatePassword(LoginRequest loginRequest);
+
+    BigDecimal getBalance(LoginRequest loginRequest);
 }

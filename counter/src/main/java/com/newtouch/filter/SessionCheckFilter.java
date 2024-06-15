@@ -17,7 +17,8 @@ public class SessionCheckFilter implements Filter {
     @Autowired
     private UserService userService;
 
-    private Set<String> whiteRootPaths = Sets.newHashSet("/counter/user/captcha", "/counter/user/loginFail", "/counter/user/login");
+    private Set<String> whiteRootPaths = Sets.newHashSet("/counter/user/captcha", "/counter/user/loginFail",
+            "/counter/user/login", "/counter/stock/getInvertIndex");
 
     // 解决ajax跨域问题
     @Override

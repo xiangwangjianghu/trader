@@ -2,3 +2,5 @@
 
 common/build/**
 counter/build/**
+common/.gradle/**
+counter/.gradle/**

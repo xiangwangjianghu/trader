@@ -28,7 +28,7 @@ public class RedisUtil {
         int expireTime = switch (cacheEnum) {
             case USER -> accountExpireTime;
             case CAPTCHA -> captchaExpireTime;
-            case ORDER, TRADE, POSI -> orderExpireTime;
+            case ORDER, TRADE, POSITION -> orderExpireTime;
             default -> 10;
         };
 

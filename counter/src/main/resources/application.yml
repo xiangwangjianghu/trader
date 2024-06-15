@@ -25,6 +25,7 @@ mybatis-plus:
   mapper-locations: classpath:/mappers/*.xml
   #开启驼峰映射，详情在XML文件中
   configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
     jdbc-type-for-null: 'null'
 
@@ -34,7 +35,24 @@ cache-expire:
   account: 3600
   order: 36000
 
-# 机器位置: 机房ID,机柜ID
 counter:
-  data-center-id: 0
-  worker-id: 0
+  # 机器位置
+  id: 1000
+  gateway-id: 1001  # 网关id
+  data-center-id: 0 # 机房ID
+  worker-id: 0      # 机柜ID
+  #直连网关信息
+  send-ip: 127.0.0.1
+  send-port: 8091
+  checksum: com.newtouch.checksum.ByteCheckSum
+  body-codec: com.newtouch.codec.BodyCodec
+  msg-codec: com.newtouch.codec.MsgCodec
+
+  #委托终端通讯
+  pub-ip: 127.0.0.1
+  pub-port: 1883
+
+
+  #总线订阅ip
+  subbusip: 127.0.0.1
+  subbusport: 1883

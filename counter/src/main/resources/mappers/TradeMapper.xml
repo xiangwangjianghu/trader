@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.newtouch.mappers.TradeMapper">
+    <resultMap id="BaseResultMap" type="com.newtouch.entity.Trade">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="uid" jdbcType="BIGINT" property="uid"/>
+        <result column="oid" jdbcType="BIGINT" property="oid"/>
+        <result column="code" jdbcType="INTEGER" property="code"/>
+        <result column="direction" jdbcType="INTEGER" property="direction"/>
+        <result column="price" jdbcType="BIGINT" property="price"/>
+        <result column="count" jdbcType="BIGINT" property="count"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <select id="selectListByUid" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select *
+        from public.t_trade
+        where uid = #{uid, jdbcType = BIGINT}
+    </select>
+
+
+</mapper>

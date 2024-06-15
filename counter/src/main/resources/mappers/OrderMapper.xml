@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.newtouch.mappers.OrderMapper">
+    <resultMap id="BaseResultMap" type="com.newtouch.entity.Order">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="uid" jdbcType="BIGINT" property="uid"/>
+        <result column="code" jdbcType="INTEGER" property="code"/>
+        <result column="direction" jdbcType="INTEGER" property="direction"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="price" jdbcType="NUMERIC" property="price"/>
+        <result column="count" jdbcType="NUMERIC" property="count"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+
+    <select id="selectListByUid" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select *
+        from public.t_order
+        where uid = #{uid, jdbcType = BIGINT}
+    </select>
+
+    <insert id="sendOrder" parameterType="com.newtouch.dto.request.OrderRequest" useGeneratedKeys="true" keyColumn="id"
+            keyProperty="id">
+        insert into public.t_order (uid, code, direction, type, price, count, status)
+        values (#{uid}, #{code}, #{direction}, #{type}, #{price}, #{count}, #{status})
+    </insert>
+</mapper>

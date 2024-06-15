@@ -5,7 +5,7 @@
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="username" jdbcType="VARCHAR" property="username"/>
         <result column="password" jdbcType="VARCHAR" property="password"/>
-        <result column="balance"  jdbcType="BIGINT" property="balance"/>
+        <result column="balance"  jdbcType="NUMERIC" property="balance"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>
@@ -18,5 +18,15 @@
     <update id="updatePassword" parameterType="com.newtouch.dto.request.LoginRequest">
         update public.t_user set password = #{newPassword, jdbcType = VARCHAR}
             where username = #{username, jdbcType = VARCHAR} and password = #{password, jdbcType = VARCHAR}
+    </update>
+
+    <select id="getBalance" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select balance from public.t_user where
+            id = #{uid, jdbcType = BIGINT}
+    </select>
+
+    <update id="updateBalance" >
+        update public.t_user set balance = balance + #{amount, jdbcType = NUMERIC}
+        where id = #{uid, jdbcType = BIGINT}
     </update>
 </mapper>

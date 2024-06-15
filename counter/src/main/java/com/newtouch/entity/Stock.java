@@ -5,7 +5,6 @@ import lombok.*;
 import org.springframework.data.annotation.Transient;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -13,22 +12,22 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 @EqualsAndHashCode(callSuper = false)
-@TableName("t_user")
-public class User implements Serializable {
+@TableName("t_stock")
+public class Stock implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
-    private Long id;
+    @TableId(value = "code")
+    private Integer code;
 
-    @TableField("username")
-    private String username;
+    @TableField("name")
+    private String name;
 
-    @TableField("password")
-    private String password;
+    @TableField("abbr_name")
+    private String abbrName;
 
-    @TableField("balance")
-    private BigDecimal balance;
+    @TableField("status")
+    private Integer status;
 
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     private LocalDateTime createTime;

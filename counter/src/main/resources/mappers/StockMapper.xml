@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.newtouch.mappers.StockMapper">
+    <resultMap id="BaseResultMap" type="com.newtouch.entity.Stock">
+        <id column="code" jdbcType="INTEGER" property="code"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="abbr_name" jdbcType="VARCHAR" property="abbrName"/>
+        <result column="status"  jdbcType="INTEGER" property="status"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+
+    <select id="getStockList" parameterType="com.newtouch.dto.request.StockRequest" resultMap="BaseResultMap">
+        select * from public.t_stock
+            <where>
+                1 = 1
+                <if test = "code != null">
+                    and code = #{code, jdbcType="INTEGER"}
+                </if>
+                <if test = "name != null">
+                    and name = #{name, jdbcType="VARCHAR"}
+                </if>
+                <if test = "abbrName != null">
+                    and abbr_name = #{abbrName, jdbcType="VARCHAR"}
+                </if>
+                <if test = "status != null">
+                    and status = #{status, jdbcType="SMALLINT"}
+                </if>
+            </where>
+    </select>
+
+
+</mapper>

@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+
 @Slf4j
 @RestController
 @RequestMapping("/user")
@@ -68,11 +70,19 @@ public class UserController {
     }
 
     @PostMapping("/updatePassword")
-    public TraderResponse<Boolean> updatePassword(@RequestBody @Validated LoginRequest loginRequest) {
+    public TraderResponse<Boolean> updatePassword(@RequestBody LoginRequest loginRequest) {
         boolean updatePassword = userService.updatePassword(loginRequest);
 
         TraderResponse<Boolean> result = new TraderResponse<>();
         return updatePassword ? result.success(ResponseEnum.SUCCESS.getCode(), ResponseEnum.SUCCESS.getMsg(), true) :
                 result.fail(ResponseEnum.UPDATE_PASSWORD_ERROR.getCode(), ResponseEnum.UPDATE_PASSWORD_ERROR.getMsg(), false);
+    }
+
+    @PostMapping("/getBalance")
+    public TraderResponse<BigDecimal> getBalance(@RequestBody LoginRequest loginRequest) {
+        BigDecimal balance = userService.getBalance(loginRequest);
+
+        TraderResponse<BigDecimal> result = new TraderResponse<>();
+        return result.success(ResponseEnum.SUCCESS.getCode(), ResponseEnum.SUCCESS.getMsg(), balance);
     }
 }
