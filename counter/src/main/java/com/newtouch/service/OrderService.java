@@ -1,6 +1,6 @@
 package com.newtouch.service;
 
-import com.newtouch.dto.request.OrderRequest;
+import com.newtouch.dto.OrderRequest;
 import com.newtouch.entity.Order;
 import com.newtouch.enums.ResponseEnum;
 

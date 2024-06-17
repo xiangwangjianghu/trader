@@ -1,7 +1,7 @@
 package com.newtouch.controller;
 
 import com.newtouch.dto.TraderResponse;
-import com.newtouch.dto.request.OrderRequest;
+import com.newtouch.dto.OrderRequest;
 import com.newtouch.entity.Order;
 import com.newtouch.entity.Position;
 import com.newtouch.entity.Stock;

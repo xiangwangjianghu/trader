@@ -9,19 +9,31 @@ plugins {
 }
 
 dependencies {
+    // 工具类
+    api "cn.hutool:hutool-all:5.0.7"
+    api "org.apache.commons:commons-lang3:3.14.0"
+    api 'com.google.guava:guava:33.2.0-jre'
+    api 'com.alibaba.fastjson2:fastjson2:2.0.50'
+    api 'org.eclipse.collections:eclipse-collections:12.0.0.M3'
+
+    // lombok
+    compileOnlyApi 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+
     //  web
     api 'org.springframework.boot:spring-boot-starter-web'
+    api 'org.springframework.boot:spring-boot-starter-validation'
     api 'com.baomidou:mybatis-plus-spring-boot3-starter:3.5.6'
     api 'org.postgresql:postgresql'
     api 'org.springframework.boot:spring-boot-starter-actuator'
     api 'org.springframework.boot:spring-boot-starter-data-redis'
-}
 
-tasks.register('wrapper', Wrapper) {
-    //gradle的版本
-    gradleVersion = '8.7'
-    //版本类型：BIN、ALL（完全版，可以看gradle的代码）
-    distributionType = 'ALL'
+    // alipay
+    api 'com.alipay.sofa:sofa-rpc-all:5.13.0'
+    //  vertx
+    api 'io.vertx:vertx-core:4.5.8'
 }
 
 tasks.bootJar {

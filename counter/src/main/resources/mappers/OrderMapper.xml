@@ -20,7 +20,7 @@
         where uid = #{uid, jdbcType = BIGINT}
     </select>
 
-    <insert id="sendOrder" parameterType="com.newtouch.dto.request.OrderRequest" useGeneratedKeys="true" keyColumn="id"
+    <insert id="sendOrder" parameterType="com.newtouch.dto.OrderRequest" useGeneratedKeys="true" keyColumn="id"
             keyProperty="id">
         insert into public.t_order (uid, code, direction, type, price, count, status)
         values (#{uid}, #{code}, #{direction}, #{type}, #{price}, #{count}, #{status})

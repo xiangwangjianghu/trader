@@ -1,4 +1,4 @@
-package com.newtouch.dto.request;
+package com.newtouch.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.deser.std.NumberDeserializers;

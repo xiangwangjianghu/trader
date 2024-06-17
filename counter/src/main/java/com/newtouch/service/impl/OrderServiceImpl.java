@@ -2,7 +2,7 @@ package com.newtouch.service.impl;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
-import com.newtouch.dto.request.OrderRequest;
+import com.newtouch.dto.OrderRequest;
 import com.newtouch.entity.Order;
 import com.newtouch.enums.CacheEnum;
 import com.newtouch.enums.OrderDirectionEnum;
