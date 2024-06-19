@@ -3,7 +3,9 @@ package com.newtouch.transport.codec.impl;
 import com.newtouch.dto.CommonMsg;
 import com.newtouch.transport.codec.IMsgCodec;
 import io.vertx.core.buffer.Buffer;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MsgCodec implements IMsgCodec {
     @Override
     public Buffer encodeToBuffer(CommonMsg msg) {

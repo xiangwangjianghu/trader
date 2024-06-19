@@ -1,0 +1,57 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: root
+    driverClassName: org.postgresql.Driver
+  jackson:
+    time-zone: GMT+8
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      timeout: 6000ms
+
+mybatis-plus:
+  mapper-locations: classpath:/mappers/*.xml
+  #开启驼峰映射，详情在XML文件中
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+    jdbc-type-for-null: 'null'
+
+# redis缓存
+cache-expire:
+  captcha: 120
+  account: 3600
+  order: 36000
+
+# 繼承模塊配置
+counter:
+  name: counter
+  context-path: /counter
+  port: 8088
+  # 机器位置
+  id: 1000
+  gateway-id: 1001  # 网关id
+  data-center-id: 0 # 机房ID
+  worker-id: 0      # 机柜ID
+  #直连网关信息
+  gateway-ip: 127.0.0.1
+  gateway-port: 8091
+
+  #委托终端通讯
+  pub-ip: 127.0.0.1
+  pub-port: 1883
+
+  #总线订阅ip
+  sub-bus-ip: 127.0.0.1
+  sub-bus-port: 1883
+
+gateway:
+  name: gateway
+  context-path: /gateway
+  port: 8089
+
+
+

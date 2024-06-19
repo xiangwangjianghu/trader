@@ -1,4 +1,4 @@
-package com.newtouch.config;
+package com.newtouch.configs;
 
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;

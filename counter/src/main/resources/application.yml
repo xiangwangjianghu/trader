@@ -1,57 +1,11 @@
+spring:
+  profiles:
+    active: common
+  application:
+    name: ${counter.name}
+
 server:
   servlet:
-    context-path: /counter
-  port: 8090
+    context-path: ${counter.context-path}
+  port: ${counter.port}
 
-spring:
-  application:
-    name: counter
-  profiles:
-    active: default
-  datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
-    password: root
-    driverClassName: org.postgresql.Driver
-  jackson:
-    time-zone: GMT+8
-  data:
-    redis:
-      host: 127.0.0.1
-      port: 6379
-      timeout: 6000ms
-
-mybatis-plus:
-  mapper-locations: classpath:/mappers/*.xml
-  #开启驼峰映射，详情在XML文件中
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    map-underscore-to-camel-case: true
-    jdbc-type-for-null: 'null'
-
-# redis缓存
-cache-expire:
-  captcha: 120
-  account: 3600
-  order: 36000
-
-counter:
-  # 机器位置
-  id: 1000
-  gateway-id: 1001  # 网关id
-  data-center-id: 0 # 机房ID
-  worker-id: 0      # 机柜ID
-  #直连网关信息
-  send-ip: 127.0.0.1
-  send-port: 8091
-  checksum: com.newtouch.checksum.ByteCheckSum
-  body-codec: com.newtouch.codec.BodyCodec
-  msg-codec: com.newtouch.codec.MsgCodec
-
-  #委托终端通讯
-  pub-ip: 127.0.0.1
-  pub-port: 1883
-
-  #总线订阅ip
-  subbusip: 127.0.0.1
-  subbusport: 1883

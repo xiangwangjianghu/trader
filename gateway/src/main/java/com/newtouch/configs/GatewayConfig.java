@@ -11,14 +11,8 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class GatewayConfig {
-    @Value("${counter.gateway-id}")
-    private Short gatewayId;
-
     @Value("${counter.gateway-port}")
     private Integer gatewayPort;
-
-    @Value("${counter.sequence-port}")
-    private Integer sequencePort;
 
     private final Vertx vertx = Vertx.vertx();
 

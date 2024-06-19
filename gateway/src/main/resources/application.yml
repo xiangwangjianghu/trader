@@ -1,51 +1,10 @@
+spring:
+  profiles:
+    active: common
+  application:
+    name: ${gateway.name}
+
 server:
   servlet:
-    context-path: /gateway
-  port: 8091
-
-spring:
-  application:
-    name: gateway
-  profiles:
-    active: default
-  datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
-    password: root
-    driverClassName: org.postgresql.Driver
-  jackson:
-    time-zone: GMT+8
-  data:
-    redis:
-      host: 127.0.0.1
-      port: 6379
-      timeout: 6000ms
-
-# redis缓存
-cache-expire:
-  captcha: 120
-  account: 3600
-  order: 36000
-
-counter:
-  # 机器位置
-  id: 1000
-  gateway-id: 1001  # 网关id
-  data-center-id: 0 # 机房ID
-  worker-id: 0      # 机柜ID
-  #直连网关信息
-  gateway-ip: 127.0.0.1
-  gateway-port: 8091
-  checksum: com.newtouch.checksum.ByteCheckSum
-  body-codec: com.newtouch.codec.BodyCodec
-  msg-codec: com.newtouch.codec.MsgCodec
-  # 排队机
-  sequence-port: 8890
-  #委托终端通讯
-  pub-ip: 127.0.0.1
-  pub-port: 1883
-
-
-  #总线订阅ip
-  subbusip: 127.0.0.1
-  subbusport: 1883
+    context-path: ${gateway.context-path}
+  port: ${gateway.port}

@@ -10,6 +10,7 @@ import com.newtouch.enums.ResponseEnum;
 import com.newtouch.mappers.OrderMapper;
 import com.newtouch.mappers.UserMapper;
 import com.newtouch.service.OrderService;
+import com.newtouch.utils.GatewayUtil;
 import com.newtouch.utils.IdUtil;
 import com.newtouch.utils.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +32,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private IdUtil idUtil;
+
+    @Autowired
+    private GatewayUtil gatewayUtil;
 
     @Autowired
     private OrderMapper orderMapper;
@@ -71,14 +75,15 @@ public class OrderServiceImpl implements OrderService {
             // 2.插入訂單表
             orderMapper.sendOrder(orderRequest);
 
-            // 3.序列化委托订单
+            // 3.生成全局ID  组装ID long [  柜台ID,  委托ID ]
             long counterOid = idUtil.combineOid(counterId, orderRequest.getId());   // 组装ID [  柜台ID,  委托ID ]
             orderRequest.setCounterOid(counterOid);
 
-            // 4.发送网关
+            // 4.打包委托(orderRequest --> commonmsg -->tcp数据流)
+            // 发送网关
+            gatewayUtil.sendOrder(orderRequest);
 
-
-            log.info("訂單請求對象: {}", JSONObject.toJSONString(orderRequest));
+            log.info("發送訂單請求對象: {}", JSONObject.toJSONString(orderRequest));
             return ResponseEnum.SUCCESS;
         } else {
             return ResponseEnum.USER_BALANCE_SHORTAGE;
@@ -91,8 +96,9 @@ public class OrderServiceImpl implements OrderService {
         orderRequest.setCounterOid(counterOid);
 
         // 发送网关
+        gatewayUtil.sendOrder(orderRequest);
 
-        log.info("訂單請求對象: {}", JSONObject.toJSONString(orderRequest));
+        log.info("取消訂單請求對象: {}", JSONObject.toJSONString(orderRequest));
         return ResponseEnum.SUCCESS;
     }
 }
