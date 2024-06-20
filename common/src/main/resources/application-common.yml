@@ -52,6 +52,20 @@ gateway:
   name: gateway
   context-path: /gateway
   port: 8089
+  urls: bolt://127.0.0.1:8090,
+
+sequence:
+  name: sequence
+  context-path: /sequence
+  port: 8090
+
+engine:
+  name: engine
+  context-path: /engine
+  port: 8087
+  # 撮合核心对外广播地址
+  multicast-ip: 230.0.0.1
+  multicast-port: 1234
 
 
 

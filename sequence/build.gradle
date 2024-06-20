@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'java-library'
+    //所有子模块都是springboot项目，如不是，不能打包。
+    id 'maven-publish'
+    id 'org.springframework.boot' version '3.2.6'
+    id 'io.spring.dependency-management' version '1.1.5'
+}
+
+dependencies {
+    implementation project(':common')
+
+    // lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+}
+

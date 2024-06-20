@@ -1,0 +1,23 @@
+spring:
+  profiles:
+    active: common
+  application:
+    name: ${sequence.name}
+
+server:
+  servlet:
+    context-path: ${sequence.context-path}
+  port: ${sequence.port}
+
+sequence:
+  - data-path: D:/server1/
+    serve-url: 127.0.0.1:8891
+    server-list: 127.0.0.1:8891,127.0.0.1:8892,127.0.0.1:8893
+  - data-path: D:/server2/
+    serve-url: 127.0.0.1:8892
+    server-list: 127.0.0.1:8891,127.0.0.1:8892,127.0.0.1:8893
+  - data-path: D:/server3/
+    serve-url: 127.0.0.1:8893
+    server-list: 127.0.0.1:8891,127.0.0.1:8892,127.0.0.1:8893
+
+
