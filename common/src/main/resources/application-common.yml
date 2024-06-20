@@ -52,7 +52,7 @@ gateway:
   name: gateway
   context-path: /gateway
   port: 8089
-  urls: bolt://127.0.0.1:8090,
+  url: bolt://127.0.0.1:8090
 
 sequence:
   name: sequence
