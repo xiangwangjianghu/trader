@@ -11,6 +11,7 @@ import com.alipay.sofa.jraft.rhea.storage.StorageType;
 import com.alipay.sofa.jraft.util.Endpoint;
 import com.alipay.sofa.rpc.config.ConsumerConfig;
 import com.google.api.client.util.Lists;
+import com.google.common.collect.Maps;
 import com.newtouch.dto.SequenceNode;
 import com.newtouch.listener.GatewayChannelListener;
 import com.newtouch.service.GatewayService;
@@ -23,6 +24,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Component
@@ -45,6 +47,8 @@ public class SequenceConfig {
     @Getter
     private SequenceNode sequenceNode;
 
+    public static Map<String, GatewayService> gatewayServiceMap = Maps.newConcurrentMap();
+
     // 建立到网关的连接, 併抓取訂單數據
     private void startGateway() {
         ConsumerConfig<GatewayService> consumerConfig = new ConsumerConfig<GatewayService>()
@@ -59,7 +63,7 @@ public class SequenceConfig {
 
         // 获取引用代理类
         GatewayService gatewayService = consumerConfig.refer();
-        channelListener.gatewayServiceMap.put(gatewayUrl, gatewayService);
+        gatewayServiceMap.put(gatewayUrl, gatewayService);
 
         // 定时抓取数据
 

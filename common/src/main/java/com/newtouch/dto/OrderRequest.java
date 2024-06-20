@@ -33,4 +33,7 @@ public class OrderRequest {
 
     @JsonDeserialize(using = NumberDeserializers.LongDeserializer.class)
     Long counterOid;    // 组装ID [  柜台ID,  委托ID ]
+
+    @JsonDeserialize(using = NumberDeserializers.LongDeserializer.class)
+    Long timestamp;
 }

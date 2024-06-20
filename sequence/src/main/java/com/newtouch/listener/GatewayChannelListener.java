@@ -4,20 +4,20 @@ import com.alipay.sofa.rpc.config.ConsumerConfig;
 import com.alipay.sofa.rpc.listener.ChannelListener;
 import com.alipay.sofa.rpc.transport.AbstractChannel;
 import com.google.common.collect.Maps;
+import com.newtouch.configs.SequenceConfig;
 import com.newtouch.service.GatewayService;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
 @Slf4j
 @RequiredArgsConstructor
 public class GatewayChannelListener implements ChannelListener {
-
-    @Getter
-    public Map<String, GatewayService> gatewayServiceMap = Maps.newConcurrentMap();
 
     @NonNull
     private ConsumerConfig<GatewayService> consumerConfig;
@@ -34,7 +34,7 @@ public class GatewayChannelListener implements ChannelListener {
         log.info("連接到網關 : {}", remoteAddr);
 
         // 保存当前链接
-        gatewayServiceMap.put(remoteAddr, consumerConfig.refer());
+        SequenceConfig.gatewayServiceMap.put(remoteAddr, consumerConfig.refer());
     }
 
     @Override
@@ -43,6 +43,6 @@ public class GatewayChannelListener implements ChannelListener {
         log.info("斷開網關連接 : {}", remoteAddr);
 
         // 斷開当前链接
-        gatewayServiceMap.remove(remoteAddr);
+        SequenceConfig.gatewayServiceMap.remove(remoteAddr);
     }
 }
