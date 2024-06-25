@@ -1,6 +1,6 @@
 rootProject.name = 'trader'
 
-include 'common', 'counter', 'gateway', 'sequence'
+include 'common', 'counter', 'gateway', 'sequence', 'engine'
 //include ':GradleCommon:GradleOne'
 //include ':GradleOne:GradleCommon'
 //findProject(':GradleCommon:GradleOne')?.name = 'GradleOne'

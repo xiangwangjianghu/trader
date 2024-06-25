@@ -1,8 +1,6 @@
-package com.newtouch.dto;
+package com.newtouch.dto.order;
 
-import com.newtouch.enums.ResponseEnum;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

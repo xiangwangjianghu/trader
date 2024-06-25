@@ -1,23 +1,34 @@
 package com.newtouch.utils;
 
 import com.alibaba.fastjson2.JSONObject;
+import com.alipay.sofa.jraft.util.Bits;
+import com.alipay.sofa.jraft.util.BytesUtil;
 import com.newtouch.configs.SequenceConfig;
-import com.newtouch.dto.OrderRequest;
+import com.newtouch.dto.order.OrderPackDTO;
+import com.newtouch.dto.order.OrderRequest;
 import com.newtouch.service.GatewayService;
+import com.newtouch.transport.codec.IBodyCodec;
+import com.newtouch.transport.codec.impl.BodyCodec;
+import io.vertx.core.buffer.Buffer;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.TimerTask;
-import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
 public class GatewayTask extends TimerTask {
     @NonNull
     private SequenceConfig sequenceConfig;
+
+    private final IBodyCodec bodyCodec = new BodyCodec();
+
+    private static final byte[] PACKET_NO_KEY = BytesUtil.writeUtf8("seq_pqcket_no");
+
 
     @Override
     public void run() {
@@ -51,6 +62,26 @@ public class GatewayTask extends TimerTask {
         });
 
         // 存储到KV Store，发送到撮合核心
+        try {
+            // 1.操作KV Store
+            long packetNo = getPacketNoFromStore();
+            byte[] serialize = bodyCodec.serialize(new OrderPackDTO(packetNo, orderRequestList));
+
+            insertToKvStore(packetNo, serialize);
+            updatePacketNoInStore(packetNo + 1);
+
+            // TODO
+            // 2.发送到撮合核心
+            sequenceConfig.getDatagramSocket().send(
+                    Buffer.buffer(serialize),
+                    sequenceConfig.getMulticastPort(),
+                    sequenceConfig.getMulticastIp(),
+                    null
+            );
+
+        } catch (Exception e) {
+            log.error("編碼訂單請求包出錯", e);
+        }
     }
 
     // 时间排序
@@ -78,4 +109,28 @@ public class GatewayTask extends TimerTask {
     private int compareCount(OrderRequest o1, OrderRequest o2) {
         return o2.getCount().compareTo(o1.getCount());
     }
+
+    // 保存PacketNo
+    private void insertToKvStore(long packetNo, byte[] serialize) {
+        byte[] key = new byte[8];
+        Bits.putLong(key, 0, packetNo);
+
+        sequenceConfig.getSequenceNode().getRheaKVStore().put(key, serialize);
+    }
+
+    // 获取PacketNo
+    private long getPacketNoFromStore() {
+        byte[] bPacketNo = sequenceConfig.getSequenceNode().getRheaKVStore().bGet(PACKET_NO_KEY);
+
+        return ArrayUtils.isNotEmpty(bPacketNo) ? Bits.getLong(bPacketNo, 0) : 0L;
+    }
+
+    // 更新PacketNo
+    private void updatePacketNoInStore(long packetNo) {
+        final byte[] bytes = new byte[8];
+        Bits.putLong(bytes, 0, packetNo);
+
+        sequenceConfig.getSequenceNode().getRheaKVStore().put(PACKET_NO_KEY, bytes);
+    }
+
 }

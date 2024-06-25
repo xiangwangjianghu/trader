@@ -1,7 +1,7 @@
 package com.newtouch.handler.impl;
 
-import com.newtouch.dto.CommonMsg;
-import com.newtouch.dto.OrderRequest;
+import com.newtouch.dto.order.CommonMsg;
+import com.newtouch.dto.order.OrderRequest;
 import com.newtouch.handler.IMsgHandler;
 import com.newtouch.transport.codec.IBodyCodec;
 import com.newtouch.utils.OrderRequestQueue;

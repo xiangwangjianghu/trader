@@ -1,7 +1,7 @@
 package com.newtouch.mappers;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.newtouch.dto.OrderRequest;
+import com.newtouch.dto.order.OrderRequest;
 import com.newtouch.entity.Order;
 import io.lettuce.core.dynamic.annotation.Param;
 

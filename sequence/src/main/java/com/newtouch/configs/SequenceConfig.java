@@ -10,21 +10,23 @@ import com.alipay.sofa.jraft.rhea.options.configured.StoreEngineOptionsConfigure
 import com.alipay.sofa.jraft.rhea.storage.StorageType;
 import com.alipay.sofa.jraft.util.Endpoint;
 import com.alipay.sofa.rpc.config.ConsumerConfig;
-import com.google.api.client.util.Lists;
 import com.google.common.collect.Maps;
 import com.newtouch.dto.SequenceNode;
 import com.newtouch.listener.GatewayChannelListener;
 import com.newtouch.service.GatewayService;
-import lombok.Data;
+import com.newtouch.utils.GatewayTask;
+import io.vertx.core.Vertx;
+import io.vertx.core.datagram.DatagramSocket;
+import io.vertx.core.datagram.DatagramSocketOptions;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
 
 @Slf4j
 @Component
@@ -39,15 +41,32 @@ public class SequenceConfig {
     private String gatewayUrl;
 
     @Value("${engine.multicast-ip}")
+    @Getter
     private String multicastIp;
 
     @Value("${engine.multicast-port}")
-    private String multicastPort;
+    @Getter
+    private Integer multicastPort;
 
     @Getter
     private SequenceNode sequenceNode;
 
+    @Getter
+    private DatagramSocket datagramSocket;
+
     public static Map<String, GatewayService> gatewayServiceMap = Maps.newConcurrentMap();
+
+    public void startup(int sequence) {
+        // 啟動kv store集群
+        startSequenceNode(sequence);
+
+        // 啟動下游广播
+        startMultiCast();
+
+        // 連接網關
+        startGateway();
+    }
+
 
     // 建立到网关的连接, 併抓取訂單數據
     private void startGateway() {
@@ -66,7 +85,7 @@ public class SequenceConfig {
         gatewayServiceMap.put(gatewayUrl, gatewayService);
 
         // 定时抓取数据
-
+        new Timer().schedule(new GatewayTask(this), 5000, 1000);
 
     }
 
@@ -99,5 +118,10 @@ public class SequenceConfig {
         // 监听停止 执行节点关闭
         Runtime.getRuntime().addShutdownHook(new Thread(sequenceNode::stop));
         log.info("成功啟動排隊機節點 : {}, 地址 : {}", sequence, serveUrlList.get(sequence));
+    }
+
+    // 下游广播
+    private void startMultiCast() {
+        datagramSocket = Vertx.vertx().createDatagramSocket(new DatagramSocketOptions());
     }
 }

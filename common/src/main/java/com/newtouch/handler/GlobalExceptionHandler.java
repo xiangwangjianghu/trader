@@ -1,6 +1,6 @@
 package com.newtouch.handler;
 
-import com.newtouch.dto.TraderResponse;
+import com.newtouch.dto.order.TraderResponse;
 import com.newtouch.enums.ResponseEnum;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;

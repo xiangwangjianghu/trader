@@ -1,0 +1,17 @@
+spring:
+  profiles:
+    active: common
+  application:
+    name: ${engine.name}
+
+server:
+  servlet:
+    context-path: ${engine.context-path}
+  port: ${engine.port}
+
+# 總線
+bus:
+  ip: 127.0.0.1
+  port: 1883
+
+

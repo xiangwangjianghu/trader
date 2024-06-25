@@ -1,12 +1,14 @@
-package com.newtouch.dto;
+package com.newtouch.dto.order;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.deser.std.NumberDeserializers;
+import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
 
 @Data
+@Builder
 public class OrderRequest {
 
     // insert/update自動返回主鍵
@@ -21,7 +23,9 @@ public class OrderRequest {
 
     Integer direction; // 0: 買入 1: 賣出
 
-    Integer type;      // 0: 市價單  1: 限價單
+    int orderRequestType;      // 訂單請求類型
+
+    Integer orderType;         // 訂單類型 0: 市價單  1: 限價單
 
     @JsonDeserialize(using = NumberDeserializers.BigDecimalDeserializer.class)
     BigDecimal price;

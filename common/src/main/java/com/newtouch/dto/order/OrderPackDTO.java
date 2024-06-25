@@ -1,4 +1,4 @@
-package com.newtouch.dto;
+package com.newtouch.dto.order;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

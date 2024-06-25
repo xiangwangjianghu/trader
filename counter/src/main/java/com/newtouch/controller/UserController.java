@@ -1,7 +1,7 @@
 package com.newtouch.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
-import com.newtouch.dto.TraderResponse;
+import com.newtouch.dto.order.TraderResponse;
 import com.newtouch.dto.request.LoginRequest;
 import com.newtouch.dto.response.CaptchaResponse;
 import com.newtouch.entity.User;

@@ -39,6 +39,7 @@ counter:
   #直连网关信息
   gateway-ip: 127.0.0.1
   gateway-port: 8091
+  sequence-port: 8890
 
   #委托终端通讯
   pub-ip: 127.0.0.1
@@ -52,17 +53,20 @@ gateway:
   name: gateway
   context-path: /gateway
   port: 8089
-  url: bolt://127.0.0.1:8090
+  id: 1001
+  url: bolt://127.0.0.1:8890
 
 sequence:
   name: sequence
   context-path: /sequence
   port: 8090
+  id: 1002
 
 engine:
   name: engine
   context-path: /engine
   port: 8087
+  id: 1003
   # 撮合核心对外广播地址
   multicast-ip: 230.0.0.1
   multicast-port: 1234

@@ -1,10 +1,5 @@
 package com.newtouch.utils;
 
-import com.alibaba.fastjson2.JSONObject;
-import com.baomidou.mybatisplus.core.toolkit.IdWorker;
-import com.newtouch.dto.CommonMsg;
-import com.newtouch.dto.OrderRequest;
-import com.newtouch.enums.MsgConstants;
 import com.newtouch.transport.checksum.ICheckSum;
 import com.newtouch.transport.codec.IBodyCodec;
 import com.newtouch.transport.codec.IMsgCodec;

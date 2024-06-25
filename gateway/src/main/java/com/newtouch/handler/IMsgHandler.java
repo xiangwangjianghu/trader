@@ -1,6 +1,6 @@
 package com.newtouch.handler;
 
-import com.newtouch.dto.CommonMsg;
+import com.newtouch.dto.order.CommonMsg;
 import io.vertx.core.net.NetSocket;
 
 public interface IMsgHandler {
