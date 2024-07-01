@@ -9,9 +9,4 @@ server:
     context-path: ${engine.context-path}
   port: ${engine.port}
 
-# 總線
-bus:
-  ip: 127.0.0.1
-  port: 1883
-
 

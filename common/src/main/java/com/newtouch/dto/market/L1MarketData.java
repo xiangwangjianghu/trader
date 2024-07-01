@@ -3,6 +3,8 @@ package com.newtouch.dto.market;
 import lombok.Builder;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 // 一檔行情
 @Builder
 @Data
@@ -12,20 +14,20 @@ public class L1MarketData {
 
     public int code;
 
-    public long newPrice;
+    public BigDecimal newPrice;
 
     public long timestamp;
 
     // 買賣實際檔位
     public transient int buySize;
     public transient int sellSize;
-    public long[] buyPrices;
-    public long[] buyCounts;
-    public long[] sellPrices;
-    public long[] sellCounts;
+    public BigDecimal[] buyPrices;
+    public BigDecimal[] buyCounts;
+    public BigDecimal[] sellPrices;
+    public BigDecimal[] sellCounts;
 
-    public L1MarketData(long[] buyPrices, long[] buyCounts,
-                        long[] sellPrices, long[] sellCounts) {
+    public L1MarketData(BigDecimal[] buyPrices, BigDecimal[] buyCounts,
+                        BigDecimal[] sellPrices, BigDecimal[] sellCounts) {
         this.buyPrices = buyPrices;
         this.buyCounts = buyCounts;
 
@@ -37,10 +39,10 @@ public class L1MarketData {
     }
 
     public L1MarketData(int buySize, int sellSize) {
-        this.buyPrices = new long[buySize];
-        this.buyCounts = new long[buySize];
+        this.buyPrices = new BigDecimal[buySize];
+        this.buyCounts = new BigDecimal[buySize];
 
-        this.sellPrices = new long[sellSize];
-        this.sellCounts = new long[sellSize];
+        this.sellPrices = new BigDecimal[sellSize];
+        this.sellCounts = new BigDecimal[sellSize];
     }
 }

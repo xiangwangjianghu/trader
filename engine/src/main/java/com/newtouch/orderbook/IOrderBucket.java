@@ -17,7 +17,7 @@ public interface IOrderBucket extends Comparable<IOrderBucket> {
     // 移除订单
     MatchOrder delete(long oid);
 
-    long match(BigDecimal countLeft, RingBufferRequest ringBufferRequest, Consumer<MatchOrder> deleteCallback);
+    BigDecimal match(BigDecimal countLeft, RingBufferRequest ringBufferRequest, Consumer<MatchOrder> deleteCallback);
 
     // 價格發佈
     BigDecimal getPrice();

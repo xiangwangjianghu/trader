@@ -28,6 +28,7 @@ public interface IOrderBook {
         return l1MarketData;
     }
 
+    // 填充多檔行情
     void fillBuys(int size, L1MarketData data);
 
     void fillSells(int size, L1MarketData data);

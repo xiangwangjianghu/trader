@@ -9,6 +9,7 @@ import com.alipay.sofa.jraft.rhea.options.configured.MultiRegionRouteTableOption
 import com.alipay.sofa.jraft.rhea.options.configured.PlacementDriverOptionsConfigured;
 import com.alipay.sofa.jraft.rhea.options.configured.RheaKVStoreOptionsConfigured;
 import com.google.common.collect.Maps;
+import com.newtouch.bus.impl.MqttBusSender;
 import com.newtouch.dto.RingBufferRequest;
 import com.newtouch.dto.order.OrderPackDTO;
 import com.newtouch.handler.L1PubHandler;
@@ -68,6 +69,9 @@ public class EngineConfig {
     @Autowired
     private DisruptorUtil disruptorUtil;
 
+    @Autowired
+    public MqttBusSender mqttBusSender;
+
     private final RheaKVStore orderKVStore = new DefaultRheaKVStore();
     private final Vertx vertx = Vertx.vertx();
 
@@ -104,7 +108,7 @@ public class EngineConfig {
 
     // 連接總線
     private void startBus() {
-
+        mqttBusSender.startup(vertx);
     }
 
     // 連接排隊機

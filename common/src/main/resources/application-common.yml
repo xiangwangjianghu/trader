@@ -32,7 +32,7 @@ counter:
   context-path: /counter
   port: 8088
   # 机器位置
-  id: 1000
+  id: 0
   gateway-id: 1001  # 网关id
   data-center-id: 0 # 机房ID
   worker-id: 0      # 机柜ID
@@ -53,23 +53,27 @@ gateway:
   name: gateway
   context-path: /gateway
   port: 8089
-  id: 1001
+  id: 1
   url: bolt://127.0.0.1:8890
 
 sequence:
   name: sequence
   context-path: /sequence
   port: 8090
-  id: 1002
+  id: 2
 
 engine:
   name: engine
   context-path: /engine
   port: 8087
-  id: 1003
+  id: 3
   # 撮合核心对外广播地址
   multicast-ip: 230.0.0.1
   multicast-port: 1234
+  # 總線
+  bus-ip: 127.0.0.1
+  bus-port: 1883
+
 
 
 

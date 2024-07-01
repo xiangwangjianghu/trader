@@ -1,7 +1,7 @@
 .idea/**
-/.gradle/**
-/build/**
-/gradle/**
+.gradle/**
+build/**
+gradle/**
 
 common/.gradle/**
 common/build/**
@@ -10,3 +10,15 @@ common/gradle/**
 counter/.gradle/**
 counter/build/**
 counter/gradle/**
+
+gateway/.gradle/**
+gateway/build/**
+gateway/gradle/**
+
+sequence/.gradle/**
+sequence/build/**
+sequence/gradle/**
+
+engine/.gradle/**
+engine/build/**
+engine/gradle/**
