@@ -10,9 +10,13 @@ import com.newtouch.enums.ResponseEnum;
 import com.newtouch.mappers.OrderMapper;
 import com.newtouch.mappers.UserMapper;
 import com.newtouch.service.OrderService;
+import com.newtouch.transport.codec.impl.BodyCodec;
 import com.newtouch.utils.GatewayUtil;
 import com.newtouch.utils.IdUtil;
 import com.newtouch.utils.RedisUtil;
+import com.newtouch.utils.TCPUtil;
+import io.vertx.core.Vertx;
+import io.vertx.core.buffer.Buffer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +26,8 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.newtouch.consumer.MatchDataConsumer.ORDER_DATA_CACHE_ADDR;
 
 @Service
 @Slf4j
@@ -44,6 +50,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Value("${counter.id}")
     private Long counterId;
+    @Autowired
+    private BodyCodec bodyCodec;
+
+    @Autowired
+    private TCPUtil tcpUtil;
+
+    private final Vertx vertx = tcpUtil.vertx;
 
     @Override
     public List<Order> getOrderList(long uid) {
@@ -76,8 +89,23 @@ public class OrderServiceImpl implements OrderService {
             orderMapper.sendOrder(orderRequest);
 
             // 3.生成全局ID  组装ID long [  柜台ID,  委托ID ]
+            // 發送到總線
             long counterOid = idUtil.combineOid(counterId, orderRequest.getId());   // 组装ID [  柜台ID,  委托ID ]
             orderRequest.setCounterOid(counterOid);
+
+            //保存委托到缓存
+            byte[] serialize = null;
+            try {
+                //序列化委托订单
+                serialize = bodyCodec.serialize(orderRequest);
+            } catch (Exception e) {
+                log.error("序列化請求失敗: ", e);
+            }
+            if (serialize == null) {
+                return ResponseEnum.FAIL;
+            }
+
+            vertx.eventBus().send(ORDER_DATA_CACHE_ADDR, Buffer.buffer(serialize));
 
             // 4.打包委托(orderRequest --> commonmsg -->tcp数据流)
             // 发送网关
