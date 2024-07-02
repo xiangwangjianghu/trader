@@ -2,7 +2,6 @@ package com.newtouch.consumer;
 
 import com.newtouch.dto.order.CommonMsg;
 import com.newtouch.transport.checksum.ICheckSum;
-import com.newtouch.transport.codec.IBodyCodec;
 import com.newtouch.transport.codec.impl.MsgCodec;
 import io.netty.handler.codec.mqtt.MqttQoS;
 import io.vertx.core.Vertx;
@@ -42,8 +41,6 @@ public class MqttBusConsumer {
     @Value("${engine.bus-port}")
     private Integer busPort;
 
-    @Autowired
-    private IBodyCodec bodyCodec;
     @Autowired
     private ICheckSum checkSum;
     @Autowired
